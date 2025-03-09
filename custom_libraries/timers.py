@@ -34,12 +34,6 @@ def reset_stopwatch():
     st.session_state.stopwatch_elapsed_time = 0.0
 
 
-def stop_stopwatch():
-    if st.session_state.stopwatch_running:
-        st.session_state.stopwatch_elapsed_time = time.time() - st.session_state.stopwatch_start_time
-        st.session_state.stopwatch_running = False
-
-
 # Display stopwatch - to be placed inside st.fragment to only rerun this part (run_every=1)
 def stopwatch_display():
     if st.session_state.stopwatch_running:
@@ -56,7 +50,7 @@ def stopwatch_buttons():
     with left:
         st.button(":material/play_arrow:" if not st.session_state.stopwatch_running else ":material/pause:",
                   on_click=toggle_stopwatch,
-                  key="stopwatch_start_top",
+                  key="stopwatch_start_stop",
                   use_container_width=True)
     with right:
         st.button("Reset", key="stopwatch_reset", on_click=reset_stopwatch, use_container_width=True)

@@ -4,7 +4,7 @@ import PIL.Image as im
 from custom_libraries import timers, miscellaneous, chatbot
 
 # Rerun logging for debugging
-library.rerun_log()
+miscellaneous.rerun_log()
 
 
 # Gemini chat configuration
@@ -12,8 +12,8 @@ model = chatbot.gemini_configuration()
 
 
 # Temp
-question = im.open(r"question_1.webp")
-mark_scheme = im.open(r"mark_scheme_1.png")
+question = im.open(r"../res/question_1.webp")
+mark_scheme = im.open(r"../res/mark_scheme_1.png")
 PROMPT = "I don't understand how to do this question, explain it to me step by step"
 
 
@@ -38,7 +38,7 @@ def exam_display():
 
 #! --- Page ---
 st.set_page_config(layout="wide")
-library.sidebar()
+miscellaneous.sidebar()
 if st.session_state.open_chat:
     col1, col2 = st.columns([0.45, 0.55])
 else:
@@ -58,6 +58,14 @@ with col1:
         st.write("Not available")
     with m_a_tab:
         st.write("Not available")
+
+    # Record marks
+    marks_available = 10
+    left, right = st.columns(2)
+    with left:
+        marks = st.number_input(label="Record how many marks you gained to keep track of your progress", min_value=0, max_value=marks_available, placeholder="Marks gained")
+    with right:
+        st.button("Record marks", on_click=None, disabled=(not marks))
 
 
 with col2:
@@ -86,7 +94,7 @@ with col2:
     with st.container(height=300, border=True):
         # Display chat messages
         for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
+            with st.chat_message(message["role"], avatar=message["avatar"]):
                 st.write(message["content"])
 
         # Generate response if last message is not from assistant
@@ -98,7 +106,7 @@ with col2:
             elif st.session_state.last_prompt:
                 full_prompt = [st.session_state.last_prompt]
 
-            with st.chat_message("assistant"):
+            with st.chat_message("assistant", avatar="master_of_numbers.jpg"):
                 with st.spinner("Thinking"):
                     response = st.session_state.chat.send_message(content=full_prompt, stream=True)
                     response.resolve()
@@ -109,11 +117,11 @@ with col2:
                         temp.markdown(full_response)
                     temp.markdown(full_response)
                 st.markdown(response.text)
-                st.session_state.messages.append({"role": "assistant", "content": full_response})
+                st.session_state.messages.append({"role": "assistant", "content": full_response, "avatar": "master_of_numbers.jpg"})
 
     # Prompt input
-    if prompt := st.chat_input("Your message"):
-        st.session_state.messages.append({"role": "user", "content": prompt})
+    if prompt := st.chat_input("Ask Master of Numbers"):
+        st.session_state.messages.append({"role": "user", "content": prompt, "avatar": None})
         if st.session_state.first_prompt:
             st.session_state.open_chat = True
             st.session_state.first_prompt = prompt

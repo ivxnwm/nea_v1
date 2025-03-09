@@ -6,4 +6,4 @@ sidebar()
 
 st.title("Home")
 
-st.page_link("question_viewer.py", label="Try out a question", icon="❓")
+st.page_link("pages/question_viewer.py", label="Try out a question", icon="❓")
