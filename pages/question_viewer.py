@@ -12,8 +12,8 @@ model = chatbot.gemini_configuration()
 
 
 # Temp
-question = im.open(r"../res/question_1.webp")
-mark_scheme = im.open(r"../res/mark_scheme_1.png")
+question = im.open(r"res/question_1.webp")
+mark_scheme = im.open(r"res/mark_scheme_1.png")
 PROMPT = "I don't understand how to do this question, explain it to me step by step"
 
 
@@ -106,7 +106,7 @@ with col2:
             elif st.session_state.last_prompt:
                 full_prompt = [st.session_state.last_prompt]
 
-            with st.chat_message("assistant", avatar="master_of_numbers.jpg"):
+            with st.chat_message("assistant", avatar="res/master_of_numbers.jpg"):
                 with st.spinner("Thinking"):
                     response = st.session_state.chat.send_message(content=full_prompt, stream=True)
                     response.resolve()
@@ -117,7 +117,7 @@ with col2:
                         temp.markdown(full_response)
                     temp.markdown(full_response)
                 st.markdown(response.text)
-                st.session_state.messages.append({"role": "assistant", "content": full_response, "avatar": "master_of_numbers.jpg"})
+                st.session_state.messages.append({"role": "assistant", "content": full_response, "avatar": "res/master_of_numbers.jpg"})
 
     # Prompt input
     if prompt := st.chat_input("Ask Master of Numbers"):
