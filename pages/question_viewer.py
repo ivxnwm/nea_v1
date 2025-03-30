@@ -2,6 +2,9 @@
 import streamlit as st
 import PIL.Image as im
 from custom_libraries import timers, miscellaneous, chatbot
+from streamlit_app import question_bank
+from pages.question_selector import selection
+import ast
 
 # Rerun logging for debugging
 miscellaneous.rerun_log()
@@ -14,7 +17,6 @@ model = chatbot.gemini_configuration()
 # Temp
 question = im.open(r"res/question_1.webp")
 mark_scheme = im.open(r"res/mark_scheme_1.png")
-PROMPT = "I don't understand how to do this question, explain it to me step by step"
 
 
 # Initialise timers
@@ -44,28 +46,51 @@ if st.session_state.open_chat:
 else:
     col1, col2 = st.columns([0.7, 0.3])
 
-
 with col1:
+    selection # Debugging
     # Question resources
-    st.header("Paper 1 Q1 2025")
-    content = {"Question": question, "Mark scheme": mark_scheme, "Examiner's report": None, "Model answer": None}
-    question_tab, mark_scheme_tab, e_r_tab, m_a_tab = st.tabs(content.keys())
-    with question_tab:
-        st.image(question, use_container_width=True)
-    with mark_scheme_tab:
-        st.image(mark_scheme, use_container_width=True)
-    with e_r_tab:
-        st.write("Not available")
-    with m_a_tab:
-        st.write("Not available")
+    for i in range(len(selection)):
+        curr = question_bank.loc[question_bank["question_path"] == selection[i]].replace({float('nan'): None})
+        st.header(f"Question {i+1}")
+        st.markdown(
+            f""":violet-badge[{curr.loc[:, "qualification"].values[0]}]
+                        :orange-badge[{curr.loc[:, "paper"].values[0]}]
+                        :gray-badge[{curr.loc[:, "year"].values[0]}]"""
+        )
+        content = {"Question": [curr.loc[:, "question_path"].values[0] + r".jpg"] + ast.literal_eval(curr.loc[:, "additional_question_paths"].values[0]),
+                   "Mark scheme": ast.literal_eval(curr.loc[:, "mark_scheme_paths"].values[0]),
+                   "Examiner's report": curr.loc[:, "examiners_report"].values[0],
+                   "Model answer": curr.loc[:, "model_answer_link"].values[0]}
+        question_tab, mark_scheme_tab, e_r_tab, m_a_tab = st.tabs(content.keys())
+        with question_tab:
+            for page in content["Question"]:
+                question = im.open(r"res/" + page)
+                st.image(question, use_container_width=True)
+        with mark_scheme_tab:
+            for page in content["Mark scheme"]:
+                mark_scheme = im.open(r"res/" + page)
+                st.image(mark_scheme, use_container_width=True)
+        with e_r_tab:
+            if content["Examiner's report"]:
+                st.write(content["Examiner's report"])
+            else:
+                st.write("Not available")
+        with m_a_tab:
+            if content["Model answer"]:
+                st.write(content["Model answer"])
+            else:
+                st.write("Not available")
 
-    # Record marks
-    marks_available = 10
-    left, right = st.columns(2)
-    with left:
-        marks = st.number_input(label="Record how many marks you gained to keep track of your progress", min_value=0, max_value=marks_available, placeholder="Marks gained")
-    with right:
-        st.button("Record marks", on_click=None, disabled=(not marks))
+        # Record marks
+        marks_available = 10
+        left, right = st.columns(2)
+        with left:
+            marks = st.number_input(label="Record how many marks you gained to keep track of your progress",
+                                    min_value=0, max_value=marks_available,
+                                    key="marks_" + str(i),
+                                    placeholder="Marks gained")
+        with right:
+            st.button("Record marks", on_click=None, key="record_marks_" + str(i), disabled=(not marks))
 
 
 with col2:

@@ -7,7 +7,7 @@ from datetime import datetime
 def sidebar():
     with st.sidebar:
         st.page_link("pages/home.py", label="Home", icon="🏠")
-        st.page_link("pages/questions_by_topic.py", label="Questions by topic", icon="❓")
+        st.page_link("pages/question_selector.py", label="Question selector", icon="❓")
         st.page_link("pages/practice_papers.py", label="Practice papers", icon="📝")
         st.divider()
         st.page_link("pages/account.py", label="Your account", icon="👤")
