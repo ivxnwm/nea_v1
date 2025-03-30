@@ -15,7 +15,9 @@ def gemini_configuration():
                            "When a student asks you something, you identify the point of confusion "
                            "and provide a step-by-step explanation to help them understand the concept. "
                            "You can also provide examples and analogies to help the student grasp the concept better. "
-                           "You always use MathJax to format mathematical expressions.")
+                           "You always use MathJax to format mathematical expressions."
+                           "Your prompt will be of the form: "
+                           "List of questions, list of mark schemes respectively, student's prompt in triple quotes.")
     model = genai.GenerativeModel(
         model_name="gemini-2.0-flash-thinking-exp-1219",
         system_instruction=system_instructions)

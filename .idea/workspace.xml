@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3624b37c-9b73-4a5a-9079-8cf8e4c30e1c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/question_selector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/custom_libraries/miscellaneous.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_libraries/miscellaneous.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_libraries/chatbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_libraries/chatbot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/question_selector.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/question_selector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/question_viewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/question_viewer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/questions_by_topic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/question_bank.csv" beforeDir="false" afterPath="$PROJECT_DIR$/res/question_bank.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/streamlit_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/streamlit_app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,5 +94,16 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/custom_libraries/miscellaneous.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

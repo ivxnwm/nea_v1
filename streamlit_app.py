@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+import ast
 
 pages = {
     "Resources": [
@@ -20,6 +20,13 @@ pages = {
 }
 
 question_bank = pd.read_csv("res/question_bank.csv", index_col=0)
+
+question_bank.loc[:, "additional_question_paths"] = question_bank.loc[:, "additional_question_paths"].apply(
+    lambda x: ast.literal_eval(x))
+question_bank.loc[:, "mark_scheme_paths"] = question_bank.loc[:, "mark_scheme_paths"].apply(
+    lambda x: ast.literal_eval(x))
+question_bank.loc[:, "marks_gained"] = question_bank.loc[:, "marks_gained"].apply(
+    lambda x: ast.literal_eval(x))
 
 pg = st.navigation(pages, position="hidden")
 pg.run()
