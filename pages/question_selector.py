@@ -44,7 +44,6 @@ def on_search(query):
     else:
         st.session_state.search_query[query] = question_bank.loc[:, query].unique()
 
-selection = st.session_state.selection
 def on_selection():
     st.session_state.selection = []
     for i in range(len(st.session_state.search_result)):
@@ -89,7 +88,7 @@ with right:
             """,
     ):
         st.subheader("Current selection")
-        if selection:
+        if st.session_state.selection:
             with stylable_container(
                 key="current_selection_list_container",
                 css_styles="""
@@ -100,13 +99,13 @@ with right:
                     }
                     """,
             ):
-                for element in selection:
+                for element in st.session_state.selection:
                     st.write(f"{question_bank.loc[question_bank['question_path'] == element, "year"].values[0]} "
                              f"{question_bank.loc[question_bank['question_path'] == element, "qualification"].values[0]} "
                              f"{question_bank.loc[question_bank['question_path'] == element, "paper"].values[0]} "
                              f"Question {element[15:16]} ")
         with st.container():
-            if selection:
+            if st.session_state.selection:
                 st.button("Clear selection",
                           key="clear_selection_button",
                           on_click=lambda: st.session_state.update({"selection": []}),

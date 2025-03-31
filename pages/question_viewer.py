@@ -3,8 +3,6 @@ import streamlit as st
 import PIL.Image as im
 from custom_libraries import timers, miscellaneous, chatbot
 from streamlit_app import question_bank
-from pages.question_selector import selection
-import ast
 from streamlit_extras.stylable_container import stylable_container
 from datetime import datetime
 
@@ -37,10 +35,10 @@ def exam_display():
 
 
 def record_marks(i):
-    mask = question_bank["question_path"] == selection[i]
+    mask = question_bank["question_path"] == st.session_state.selection[i]
     question_bank.loc[mask, "marks_gained"] = question_bank.loc[mask, "marks_gained"].apply(
         lambda d: {**d, datetime.today().strftime('%Y-%m-%d %H:%M:%S'): st.session_state["marks_" + str(i)]})
-    # question_bank.to_csv("res/question_bank.csv")
+    question_bank.to_csv("res/question_bank.csv")
     st.toast(f"Recorded {st.session_state["marks_" + str(i)]} marks", icon="✅")
 
 
@@ -52,12 +50,13 @@ if st.session_state.open_chat:
 else:
     col1, col2 = st.columns([0.7, 0.3])
 
+
 with col1:
     # selection # Debugging
     # Question resources
     questions = []
     mark_schemes = []
-    for i in range(len(selection)):
+    for i in range(len(st.session_state.selection)):
         with stylable_container(
             key="container_with_border_" + str(i),
             css_styles="""
@@ -68,7 +67,7 @@ with col1:
                 }
                 """,
         ):
-            curr = question_bank.loc[question_bank["question_path"] == selection[i]].replace({float('nan'): None})
+            curr = question_bank.loc[question_bank["question_path"] == st.session_state.selection[i]].replace({float('nan'): None})
             st.header(f"Question {i+1}")
             st.markdown(
                 f""":violet-badge[{curr.loc[:, "qualification"].values[0]}]

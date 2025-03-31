@@ -14,8 +14,9 @@ pages = {
     "About": [
         st.Page("pages/about.py", title="About"),
     ],
-    "Question_viewer": [
+    "Hidden pages": [
         st.Page("pages/question_viewer.py", title="Question viewer"),
+        st.Page("pages/progress.py", title="Your progress"),
     ]
 }
 
