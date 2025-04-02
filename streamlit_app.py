@@ -6,17 +6,16 @@ pages = {
     "Resources": [
         st.Page("pages/home.py", title="Home"),
         st.Page("pages/question_selector.py", title="Questions by topic"),
-        st.Page("pages/practice_papers.py", title="Practice papers"),
+        st.Page("pages/revision_session.py", title="Revision session"),
     ],
     "Account": [
-        st.Page("pages/account.py", title="Your account"),
+        st.Page("pages/progress.py", title="Your progress"),
     ],
     "About": [
         st.Page("pages/about.py", title="About"),
     ],
     "Hidden pages": [
         st.Page("pages/question_viewer.py", title="Question viewer"),
-        st.Page("pages/progress.py", title="Your progress"),
     ]
 }
 
