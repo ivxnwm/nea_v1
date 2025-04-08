@@ -3,7 +3,6 @@ import streamlit as st
 from dotenv import load_dotenv
 import google.generativeai as genai
 import os
-import PIL.Image as im
 
 
 def gemini_configuration():
@@ -31,7 +30,7 @@ def gemini_configuration():
         st.session_state.chat = model.start_chat(
             history=[
                 {"role": "user", "parts": ("Hello! I will send you images of a question and its mark scheme, "
-                                           "and then in triple brackets I will say what exactly I don't understand")},
+                                           "and then tell you what exactly I don't understand")},
                 {"role": "model", "parts": "I will do my best to help you!"},
             ])
     if "first_prompt" not in st.session_state:

@@ -2,6 +2,18 @@
 
 ## Stopwatch
 
+Initialise variables with initial values
+```
+procedure initialise_stopwatch()
+    stopwatch_start_time = null
+    stopwatch_running = false
+    stopwatch_elapsed_time = 0.0
+    stopwatch_minutes = 0
+    stopwatch_seconds = 0
+endprocedure
+```
+
+
 Toggle stopwatch
 ```
 procedure toggle_stopwatch(stopwatch_running, stopwatch_elapsed_time, stopwatch_start_time, current_time)
@@ -24,7 +36,7 @@ procedure reset_stopwatch(stopwatch_running, stopwatch_start_time, stopwatch_ela
 endprocedure
 ```
 
-Stopwatch display - to be rerun every second - ?
+Stopwatch display - to be rerun every second
 ```
 procedure stopwatch_display(stopwatch_running, stopwatch_elapsed_time, stopwatch_start_time, current_time)
     if stopwatch_running = true then
@@ -34,26 +46,23 @@ procedure stopwatch_display(stopwatch_running, stopwatch_elapsed_time, stopwatch
     endif
     stopwatch_minutes = int(elapsed DIV 60)
     stopwatch_seconds = int(elapsed MOD 60)
-    print(f"{st.session_state.stopwatch_minutes:02} : {st.session_state.stopwatch_seconds:02}")
-endprocedure
-```
-
-Buttons - ?
-```
-procedure stopwatch_buttons(stopwatch_running)
-    left, right = st.columns(2)
-    with left:
-        if stopwatch_running = false then
-            st.button(":material/play_arrow:", on_click=toggle_stopwatch, key="stopwatch_start_top", use_container_width=true)
-        else
-            button(":material/pause:", on_click=toggle_stopwatch, key="stopwatch_start_stop", use_container_width=true)
-        endif
-    with right:
-        st.button("Reset", key="stopwatch_reset", on_click=reset_stopwatch, use_container_width=True)
+    print(str{stopwatch_minutes) + ":" + str(stopwatch_seconds))
 endprocedure
 ```
 
 ## Timer
+
+Initialise variables with initial values
+```
+procedure initialise_timer()
+    timer_set_time = 1  # Default to 1 minute
+    timer_remaining_time = timer_set_time * 60
+    timer_running = false
+    timer_minutes = 0
+    timer_seconds = 0
+    timer_first_run = true
+endprocedure
+```
 
 Toggle timer
 ```
@@ -75,7 +84,7 @@ procedure reset_timer(timer_remaining_time, timer_set_time, timer_running, timer
 endprocedure
 ```
 
-Timer display - to be rerun every second - ?
+Timer display - to be rerun every second
 ```
 procedure timer_display(timer_running, timer_remaining_time, timer_first_run, timer_set_time)
     if timer_running = true AND timer_remaining_time > 0 then
@@ -98,10 +107,23 @@ endprocedure
 
 # Exam clock
 
+Initialise variables with initial values
+
+```
+procedure initialise_exam()
+    exam_set_time = 1  # Default to 1 hour
+    exam_start_time = null
+    exam_end_time = null
+    exam_remaining_time = null
+    exam_running = false
+    exam_first_run = true
+endprocedure
+```
+
 Reset exam clock
 ```
 procedure reset_exam(exam_remaining_time, exam_running, exam_first_run, exam_set_time)
-    exam_remaining_time = timedelta(minutes = exam_set_time)
+    exam_remaining_time = minutes = exam_set_time
     exam_running = false
     exam_first_run = true
 endprocedure
@@ -126,23 +148,41 @@ procedure toggle_exam(exam_first_run, exam_remaining_time, exam_running, exam_st
 endprocedure
 ```
 
-Display exam clock - ?
+Display exam clock
 ```
 procedure exam_display(exam_end_time, exam_start_time, exam_running, exam_first_run, current_time)
     if exam_end_time != null AND current_time < exam_end_time then
-        print("Start" + exam_start_time.strftime("%H:%M"))
-        print("Finish" + exam_end_time.strftime("%H:%M"))
+        print("Start" + exam_start_time
+        print("Finish" + exam_end_time
     elseif exam_end_time != null AND current_time = exam_end_time then
         exam_running = false
         exam_first_run = true
         on_exam_end()
     endif
     
-    print(current_time.strftime("%H:%M"))
+    print(current_time)
 endprocedure
 ```
 
 # Chatbot
+
+Initialise variables with initial values
+```
+procedure initialise_chatbot()
+    messages = [{"role": "assistant",
+                                  "content": "Come solving faster! Obey your master!...",
+                                  "avatar": "res/master_of_numbers.jpg"}]
+    chat = model.start_chat(
+        history=[
+            {"role": "user", "parts": ("Hello! I will send you images of a question and its mark scheme, "
+                                       "and then tell you what exactly I don't understand")},
+            {"role": "model", "parts": "I will do my best to help you!"},
+        ])
+    first_prompt = true
+    last_prompt = null
+    open_chat = false
+endprocedure
+```
 
 Display messages
 ```

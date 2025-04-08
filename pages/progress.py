@@ -47,26 +47,27 @@ def display_stats(paper):
         q_attempted[paper][topic] = 0
 
         for marks_dict in paper_bank[paper].loc[paper_bank[paper]["topic"] == topic, "marks_gained"]:
-            marks_gained[paper][topic] += marks_dict[marks_dict.keys()[-1]] if topic in marks_dict else 0
+            marks_gained[paper][topic] += marks_dict[marks_dict.keys()[-1]] if topic in marks_dict else 0 #bug here
             q_attempted[paper][topic] += 1 if marks_dict else 0
 
         marks_percentage[paper][topic] = int(marks_gained[paper][topic] / marks_available[paper][topic] * 100)
         q_percentage[paper][topic] = int(q_attempted[paper][topic] / q_available[paper][topic] * 100)
 
         paper_stats = pd.concat([paper_stats,
-                                pd.DataFrame(data={"Topic": [topic],
-                                                   "Marks scored": [marks_percentage[paper][topic]],
-                                                   "Questions attempted": [q_percentage[paper][topic]]})],
+                                 pd.DataFrame(data={"Topic": [topic],
+                                                    "Marks scored": [marks_percentage[paper][topic]],
+                                                    "Questions attempted": [q_percentage[paper][topic]]
+                                                    })],
                                 ignore_index=True)
 
     st.dataframe(paper_stats, use_container_width=True,
                  column_config={
                      "Marks scored": st.column_config.ProgressColumn(None, width="small",
-                                    help="Total percentage of marks gained for all questions on this topic",
-                                    format="%d%%", min_value=0, max_value=100),
+                         help="Total percentage of marks gained for all questions on this topic",
+                         format="%d%%", min_value=0, max_value=100),
                      "Questions attempted": st.column_config.ProgressColumn(None, width="small",
-                                    help="Total percentage of questions attempted on this topic",
-                                    format="%d%%", min_value=0, max_value=100)},
+                          help="Total percentage of questions attempted on this topic",
+                          format="%d%%", min_value=0, max_value=100)},
                  hide_index=True,
                  key="stats_" + paper,
                  on_select="rerun",
@@ -88,12 +89,13 @@ def display_stats(paper):
 
         for index, question in topic_bank.iterrows():
             topic_stats = pd.concat([topic_stats,
-                                    pd.DataFrame(data={"Question":["Question " + str(index+1)],
-                                                       "Qualification": [question.loc["qualification"]],
-                                                       "Year": [question.loc["year"]],
-                                                       "Attempts": [len(question.loc["marks_gained"])],
-                                                       "Last attempted": [list(question.loc["marks_gained"])[-1]] \
-                                                            if question.loc["marks_gained"] else None})],
+                                     pd.DataFrame(data={"Question": ["Question " + str(index + 1)],
+                                                        "Qualification": [question.loc["qualification"]],
+                                                        "Year": [question.loc["year"]],
+                                                        "Attempts": [len(question.loc["marks_gained"])],
+                                                        "Last attempted": [list(question.loc["marks_gained"])[-1]] \
+                                                            if question.loc["marks_gained"] else None
+                                                        })],
                                     ignore_index=True)
 
         st.dataframe(topic_stats,

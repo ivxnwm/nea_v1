@@ -4,10 +4,9 @@ import PIL.Image as im
 from custom_libraries import timers, miscellaneous, chatbot
 from streamlit_app import question_bank
 from streamlit_extras.stylable_container import stylable_container
-from datetime import datetime
 
 
-# Rerun logging for debugging
+# *Rerun logging for debugging*
 miscellaneous.rerun_log()
 
 
@@ -34,14 +33,6 @@ def exam_display():
     timers.exam_display()
 
 
-def record_marks(i):
-    mask = question_bank["question_path"] == st.session_state.selection[i]
-    question_bank.loc[mask, "marks_gained"] = question_bank.loc[mask, "marks_gained"].apply(
-        lambda d: {**d, datetime.today().strftime('%Y-%m-%d %H:%M:%S'): st.session_state["marks_" + str(i)]})
-    question_bank.to_csv("res/question_bank.csv")
-    st.toast(f"Recorded {st.session_state["marks_" + str(i)]} marks", icon="✅")
-
-
 #! --- Page ---
 st.set_page_config(layout="wide")
 miscellaneous.sidebar()
@@ -52,71 +43,78 @@ else:
 
 
 with col1:
-    # selection # Debugging
     # Question resources
-    questions = []
-    mark_schemes = []
-    for i in range(len(st.session_state.selection)):
-        with stylable_container(
-            key="container_with_border_" + str(i),
-            css_styles="""
-                {
-                    background-color: #f5f7fb;
-                    border-radius: 1.2rem;
-                    padding: calc(1em - 1px)
-                }
-                """,
-        ):
-            curr = question_bank.loc[question_bank["question_path"] == st.session_state.selection[i]].replace({float('nan'): None})
-            st.header(f"Question {i+1}")
-            st.markdown(
-                f""":violet-badge[{curr.loc[:, "qualification"].values[0]}]
-                            :orange-badge[{curr.loc[:, "paper"].values[0]}]
-                            :gray-badge[{curr.loc[:, "year"].values[0]}]"""
-            )
-            content = {"Question": [curr.loc[:, "question_path"].values[0] + r".jpg"]
-                                   + curr.loc[:, "additional_question_paths"].values[0],
-                       "Mark scheme": curr.loc[:, "mark_scheme_paths"].values[0],
-                       "Examiner's report": curr.loc[:, "examiners_report"].values[0],
-                       "Model answer": curr.loc[:, "model_answer_link"].values[0],
-                       "Record marks": curr.loc[:, "marks_available"].values[0]}
-            question_tab, mark_scheme_tab, e_r_tab, m_a_tab, marks_tab = st.tabs(content.keys())
-            with question_tab:
-                for page in content["Question"]:
-                    questions.append(im.open(r"res/" + page))
-                    st.image(questions[-1], use_container_width=True)
-            with mark_scheme_tab:
-                for page in content["Mark scheme"]:
-                    mark_schemes.append(im.open(r"res/" + page))
-                    st.image(mark_schemes[-1], use_container_width=True)
-            with e_r_tab:
-                if content["Examiner's report"]:
-                    st.write(content["Examiner's report"])
-                else:
-                    st.write("Not available")
-            with m_a_tab:
-                if content["Model answer"]:
-                    st.write("Unfortunately, we are unable to display PMT model answers here due to copyright, "
-                             "but here is the link to the file on PMT website:")
-                    st.write(content["Model answer"])
-                else:
-                    st.write("Not available")
-            with marks_tab:
-                left, right = st.columns(2)
-                with left:
-                    st.number_input(label="Record marks you gained to keep track of your progress",
-                                    min_value=0, max_value=content["Record marks"],
-                                    key="marks_" + str(i),
-                                    placeholder="Marks gained")
-                    st.button("Record marks", args=(i,), on_click=record_marks, key="record_marks_" + str(i))
-                with right:
-                    with st.expander("Previous attempts", expanded=True):
-                        if curr.loc[:, "marks_gained"].values[0] == {}:
-                            st.write("No previous attempts")
-                        else:
-                            for record in curr.loc[:, "marks_gained"].values[0]:
-                                st.markdown(f"{record}: **{curr.loc[:, "marks_gained"].values[0][record]} marks**")
+    if "selection" in st.session_state:
+        questions = []
+        mark_schemes = []
+        for i in range(len(st.session_state.selection)):
+            with stylable_container(
+                key="container_with_border_" + str(i),
+                css_styles="""
+                    {
+                        background-color: #f5f7fb;
+                        border-radius: 1.2rem;
+                        padding: calc(1em - 1px)
+                    }
+                    """,
+            ):
+                curr = question_bank.loc[question_bank["question_path"] == st.session_state.selection[i]].replace({float('nan'): None})
+                content = {"Question": [curr.loc[:, "question_path"].values[0] + r".jpg"]
+                                       + curr.loc[:, "additional_question_paths"].values[0],
+                           "Mark scheme": curr.loc[:, "mark_scheme_paths"].values[0],
+                           "Examiner's report": curr.loc[:, "examiners_report"].values[0],
+                           "Model answer": curr.loc[:, "model_answer_link"].values[0],
+                           "Record marks": curr.loc[:, "marks_available"].values[0]}
 
+                st.header(f"Question {i+1}")
+                st.markdown(
+                    f""":violet-badge[{curr.loc[:, "qualification"].values[0]}]
+                                :orange-badge[{curr.loc[:, "paper"].values[0]}]
+                                :gray-badge[{curr.loc[:, "year"].values[0]}]"""
+                )
+
+                question_tab, mark_scheme_tab, e_r_tab, m_a_tab, marks_tab = st.tabs(content.keys())
+                with question_tab:
+                    for page in content["Question"]:
+                        questions.append(im.open(r"res/" + page))
+                        st.image(questions[-1], use_container_width=True)
+                with mark_scheme_tab:
+                    for page in content["Mark scheme"]:
+                        mark_schemes.append(im.open(r"res/" + page))
+                        st.image(mark_schemes[-1], use_container_width=True)
+                with e_r_tab:
+                    if content["Examiner's report"]:
+                        st.write(content["Examiner's report"])
+                    else:
+                        st.write("Not available")
+                with m_a_tab:
+                    if content["Model answer"]:
+                        st.write("Unfortunately, we are unable to display PMT model answers here due to copyright, "
+                                 "but here is the link to the file on PMT website:")
+                        st.write(content["Model answer"])
+                    else:
+                        st.write("Not available")
+                with marks_tab:
+
+                    left, right = st.columns(2)
+                    with left:
+                        st.number_input(label="Record marks you gained to keep track of your progress",
+                                        min_value=0, max_value=content["Record marks"],
+                                        key="marks_" + str(i),
+                                        placeholder="Marks gained")
+                        st.button("Record marks", args=(i,), on_click=miscellaneous.record_marks, key="record_marks_" + str(i))
+                    with right:
+                        with st.expander("Previous attempts", expanded=True):
+                            if curr.loc[:, "marks_gained"].values[0] == {}:
+                                st.write("No previous attempts")
+                            else:
+                                for record in curr.loc[:, "marks_gained"].values[0]:
+                                    st.markdown(f"{record}: **{curr.loc[:, "marks_gained"].values[0][record]} marks**")
+    else:
+        st.warning('''
+        No question selected.  
+        Please select a question from the Question Selector page to view it here.
+        ''')
 
 with col2:
     #! --- Timers ---

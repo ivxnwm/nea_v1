@@ -6,10 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="3624b37c-9b73-4a5a-9079-8cf8e4c30e1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_libraries/chatbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_libraries/chatbot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/custom_libraries/miscellaneous.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_libraries/miscellaneous.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/account.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/practice_papers.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/revision_session.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documentation/pseudocode.md" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/pseudocode.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/progress.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/progress.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/question_selector.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/question_selector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/question_viewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/question_viewer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/question_bank.csv" beforeDir="false" afterPath="$PROJECT_DIR$/res/question_bank.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/streamlit_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/streamlit_app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,15 +57,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/ivxnw/PycharmProjects/nea_v1&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "full.screen.before.presentation.mode": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/ivxnw/PycharmProjects/nea_v1",
+    "settings.editor.selected.configurable": "Settings.Markdown"
   }
-}</component>
+}]]></component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="nea_v1" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="nea_v1" />
+      </console-settings>
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\versh\PycharmProjects\nea_v1" />
@@ -94,6 +107,17 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

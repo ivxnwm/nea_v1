@@ -59,23 +59,23 @@ with left:
                     args=("topic",),
                     on_change=on_search)
     st.pills(label="Qualification",
-            options=question_bank.loc[:, "qualification"].unique(),
-            selection_mode="multi",
-            key="qualification",
-            args=("qualification",),
-            on_change=on_search)
+             options=question_bank.loc[:, "qualification"].unique(),
+             selection_mode="multi",
+             key="qualification",
+             args=("qualification",),
+             on_change=on_search)
     st.pills(label="Paper",
-            options=question_bank.loc[:, "paper"].unique(),
-            selection_mode="multi",
-            key="paper",
-            args=("paper",),
-            on_change=on_search)
+             options=question_bank.loc[:, "paper"].unique(),
+             selection_mode="multi",
+             key="paper",
+             args=("paper",),
+             on_change=on_search)
     st.pills(label="Year",
-            options=question_bank.loc[:, "year"].unique(),
-            selection_mode="multi",
-            key="year",
-            args=("year",),
-            on_change=on_search)
+             options=question_bank.loc[:, "year"].unique(),
+             selection_mode="multi",
+             key="year",
+             args=("year",),
+             on_change=on_search)
 with right:
     with stylable_container(
         key="current_selection_container",
@@ -112,13 +112,14 @@ with right:
                           use_container_width=True)
             st.button("Select all",
                       key="select_all_button",
-                      on_click=lambda: st.session_state.update({"selection": st.session_state.search_result["question_path"].tolist()}),
+                      on_click=lambda: st.session_state.update(
+                          {"selection": st.session_state.search_result["question_path"].tolist()}),
                       use_container_width=True)
             st.page_link("pages/question_viewer.py",
-                     label="Start practicing",
-                     icon="📝",
-                     disabled=not st.session_state.selection,
-                     use_container_width=True)
+                         label="Start practicing",
+                         icon="📝",
+                         disabled=not st.session_state.selection,
+                         use_container_width=True)
 
 grid = st.columns(3)
 col = 0

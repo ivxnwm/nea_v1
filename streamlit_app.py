@@ -28,5 +28,7 @@ question_bank.loc[:, "mark_scheme_paths"] = question_bank.loc[:, "mark_scheme_pa
 question_bank.loc[:, "marks_gained"] = question_bank.loc[:, "marks_gained"].apply(
     lambda x: ast.literal_eval(x))
 
+progress_record = pd.read_csv("res/progress_record.csv", index_col=0)
+
 pg = st.navigation(pages, position="hidden")
 pg.run()
