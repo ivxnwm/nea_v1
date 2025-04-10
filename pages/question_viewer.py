@@ -49,7 +49,7 @@ with col1:
         mark_schemes = []
         for i in range(len(st.session_state.selection)):
             with stylable_container(
-                key="container_with_border_" + str(i),
+                key="question_container_" + str(i),
                 css_styles="""
                     {
                         background-color: #f5f7fb;
@@ -70,7 +70,9 @@ with col1:
                 st.markdown(
                     f""":violet-badge[{curr.loc[:, "qualification"].values[0]}]
                                 :orange-badge[{curr.loc[:, "paper"].values[0]}]
-                                :gray-badge[{curr.loc[:, "year"].values[0]}]"""
+                                :gray-badge[{curr.loc[:, "year"].values[0]}]
+                                :blue-badge[{curr.loc[:, "topic"].values[0]}]
+                                Recommended time: {round(curr.loc[:, "marks_available"].values[0] * 1.2)} minutes"""
                 )
 
                 question_tab, mark_scheme_tab, e_r_tab, m_a_tab, marks_tab = st.tabs(content.keys())
@@ -169,7 +171,8 @@ with col2:
                         temp.markdown(full_response)
                     temp.markdown(full_response)
                 st.markdown(response.text)
-                st.session_state.messages.append({"role": "assistant", "content": full_response, "avatar": "res/master_of_numbers.jpg"})
+                st.session_state.messages.append(
+                    {"role": "assistant", "content": full_response, "avatar": "res/master_of_numbers.jpg"})
 
     # Prompt input
     if prompt := st.chat_input("Ask Master of Numbers"):

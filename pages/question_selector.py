@@ -117,7 +117,7 @@ with right:
                       use_container_width=True)
             st.page_link("pages/question_viewer.py",
                          label="Start practicing",
-                         icon="📝",
+                         icon="▶️",
                          disabled=not st.session_state.selection,
                          use_container_width=True)
 
