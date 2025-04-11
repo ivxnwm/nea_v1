@@ -6,7 +6,7 @@ from streamlit_app import question_bank
 from streamlit_extras.stylable_container import stylable_container
 
 
-# *Rerun logging for debugging*
+# Rerun logging for debugging
 miscellaneous.rerun_log()
 
 
@@ -34,6 +34,7 @@ def exam_display():
 
 
 #! --- Page ---
+# Page configuration
 st.set_page_config(layout="wide")
 miscellaneous.sidebar()
 if st.session_state.open_chat:
@@ -120,6 +121,7 @@ with col1:
 
 with col2:
     #! --- Timers ---
+    #
     timer_selection = st.segmented_control("Select timer", ["Stopwatch", "Timer", "Exam clock"],
                                selection_mode="single",
                                default=None,
@@ -145,6 +147,7 @@ with col2:
 
 
     #! ---Chatbot---
+    #
     with st.container(height=600, border=True):
         # Display chat messages
         for message in st.session_state.messages:

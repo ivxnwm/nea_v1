@@ -5,5 +5,3 @@ from custom_libraries.miscellaneous import sidebar
 sidebar()
 
 st.title("Home")
-
-st.page_link("pages/question_viewer.py", label="Try out a question", icon="❓")

@@ -1,7 +1,12 @@
+#
 import streamlit as st
 from custom_libraries.miscellaneous import sidebar, rerun_log
 from streamlit_app import question_bank
 from streamlit_extras.stylable_container import stylable_container
+
+
+# Rerun logging for debugging
+rerun_log()
 
 
 st.set_page_config(page_title="Blueberrevise", page_icon="🫐", layout="wide", menu_items={
@@ -9,10 +14,6 @@ st.set_page_config(page_title="Blueberrevise", page_icon="🫐", layout="wide", 
         'Report a bug': "https://www.extremelycoolapp.com/bug",
         'About': "# This is a header. This is an *extremely* cool app!"
     })
-
-# Rerun logging for debugging
-rerun_log()
-
 sidebar()
 
 st.title("Question selector")
@@ -50,6 +51,8 @@ def on_selection():
         if st.session_state["selection_" + str(i)]:
             st.session_state.selection.append(st.session_state.search_result.iat[i, 0])
 
+
+# Search filters
 left, right = st.columns([0.6, 0.4])
 with left:
     st.multiselect(label="Topics",
@@ -77,16 +80,13 @@ with left:
              args=("year",),
              on_change=on_search)
 with right:
-    with stylable_container(
-        key="current_selection_container",
-        css_styles="""
-            {
-                background-color: #f5f7fb;
-                border-radius: 1.2rem;
-                padding: calc(1em - 1px)
-            }
-            """,
-    ):
+    # current selection
+    with stylable_container(key="current_selection_container",
+                            css_styles="""{background-color: #f5f7fb;
+                                           border-radius: 1.2rem;
+                                           padding: calc(1em - 1px)
+                                           }""",
+                            ):
         st.subheader("Current selection")
         if st.session_state.selection:
             with stylable_container(

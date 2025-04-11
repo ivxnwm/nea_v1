@@ -1,26 +1,26 @@
-,topic,qualification,paper,marks_available,marks_scored,q_available,q_attempted,n,ef,interval
-0,Matrices,AS level,Core Pure 1,74.0,,9.0,,0.0,2.5,1.0
-1,Complex numbers,AS level,Core Pure 1,79.0,,10.0,,0.0,2.5,1.0
-2,Further vectors,AS level,Core Pure 1,56.0,,5.0,,0.0,2.5,1.0
-3,Further algebra and functions,AS level,Core Pure 1,88.0,,10.0,,0.0,2.5,1.0
-4,Proof,AS level,Core Pure 1,11.0,,2.0,,0.0,2.5,1.0
-5,Further calculus,AS level,Core Pure 1,72.0,,8.0,,0.0,2.5,1.0
-6,Hypothesis testing,AS level,Further Statistics 1,26.0,,3.0,,0.0,2.5,1.0
-7,Poisson and binomial distributions,AS level,Further Statistics 1,51.0,,4.0,,0.0,2.5,1.0
-8,Chi squared tests,AS level,Further Statistics 1,51.0,,5.0,,0.0,2.5,1.0
-9,Discrete probability distributions,AS level,Further Statistics 1,38.0,,4.0,,0.0,2.5,1.0
-10,"Work, energy and power",AS level,Further Mechanics 1,76.0,,8.0,,0.0,2.5,1.0
-11,Momentum and impulse,AS level,Further Mechanics 1,27.0,,4.0,,0.0,2.5,1.0
-12,Elastic collisions in one dimension,AS level,Further Mechanics 1,57.0,,5.0,,0.0,2.5,1.0
-13,Algorithms on graphs,AS level,Decision 1,86.0,,8.0,,0.0,2.5,1.0
-14,Critical path analysis,AS level,Decision 1,48.0,,5.0,,0.0,2.5,1.0
-15,Linear programming,AS level,Decision 1,56.0,,5.0,,0.0,2.5,1.0
-16,Algorithms and graph theory,AS level,Decision 1,40.0,,5.0,,0.0,2.5,1.0
-17,Hyperbolic functions,A level,Core Pure 1,28.0,,5.0,,0.0,2.5,1.0
-18,Differential equations,A level,Core Pure 1,45.0,,4.0,,0.0,2.5,1.0
-19,Polar coordinates,A level,Core Pure 2,7.0,,1.0,,0.0,2.5,1.0
-20,Geometric and negative binomial distributions,A level,Further Statistics 1,31.0,,3.0,,0.0,2.5,1.0
-21,Probability generating functions,A level,Further Statistics 1,27.0,,2.0,,0.0,2.5,1.0
-22,Central limit theorem,A level,Further Statistics 1,6.0,,1.0,,0.0,2.5,1.0
-23,Elastic collisions in two dimensions,A level,Further Mechanics 1,55.0,,5.0,,0.0,2.5,1.0
-24,Elastic strings and springs and elastic energy,A level,Further Mechanics 1,13.0,,1.0,,0.0,2.5,1.0
+,topic,qualification,paper,marks_available,q_available,marks_scored,q_attempted,n,ef,interval
+0,Matrices,AS level,Core Pure 1,74.0,9.0,0.0,0.0,0.0,2.5,1.0
+1,Complex numbers,AS level,Core Pure 1,79.0,10.0,0.0,0.0,0.0,2.5,1.0
+2,Further vectors,AS level,Core Pure 1,56.0,5.0,0.0,0.0,0.0,2.5,1.0
+3,Further algebra and functions,AS level,Core Pure 1,88.0,10.0,0.0,0.0,0.0,2.5,1.0
+4,Proof,AS level,Core Pure 1,11.0,2.0,0.0,0.0,0.0,2.5,1.0
+5,Further calculus,AS level,Core Pure 1,72.0,8.0,0.0,0.0,0.0,2.5,1.0
+6,Hypothesis testing,AS level,Further Statistics 1,26.0,3.0,0.0,0.0,0.0,2.5,1.0
+7,Poisson and binomial distributions,AS level,Further Statistics 1,51.0,4.0,0.0,0.0,0.0,2.5,1.0
+8,Chi squared tests,AS level,Further Statistics 1,51.0,5.0,0.0,0.0,0.0,2.5,1.0
+9,Discrete probability distributions,AS level,Further Statistics 1,38.0,4.0,0.0,0.0,0.0,2.5,1.0
+10,"Work, energy and power",AS level,Further Mechanics 1,76.0,8.0,0.0,0.0,0.0,2.5,1.0
+11,Momentum and impulse,AS level,Further Mechanics 1,27.0,4.0,0.0,0.0,0.0,2.5,1.0
+12,Elastic collisions in one dimension,AS level,Further Mechanics 1,57.0,5.0,0.0,0.0,0.0,2.5,1.0
+13,Algorithms on graphs,AS level,Decision 1,86.0,8.0,0.0,0.0,0.0,2.5,1.0
+14,Critical path analysis,AS level,Decision 1,48.0,5.0,0.0,0.0,0.0,2.5,1.0
+15,Linear programming,AS level,Decision 1,56.0,5.0,0.0,0.0,0.0,2.5,1.0
+16,Algorithms and graph theory,AS level,Decision 1,40.0,5.0,0.0,0.0,0.0,2.5,1.0
+17,Hyperbolic functions,A level,Core Pure 1,28.0,5.0,0.0,0.0,0.0,2.5,1.0
+18,Differential equations,A level,Core Pure 1,45.0,4.0,0.0,0.0,0.0,2.5,1.0
+19,Polar coordinates,A level,Core Pure 2,7.0,1.0,0.0,0.0,0.0,2.5,1.0
+20,Geometric and negative binomial distributions,A level,Further Statistics 1,31.0,3.0,0.0,0.0,0.0,2.5,1.0
+21,Probability generating functions,A level,Further Statistics 1,27.0,2.0,0.0,0.0,0.0,2.5,1.0
+22,Central limit theorem,A level,Further Statistics 1,6.0,1.0,0.0,0.0,0.0,2.5,1.0
+23,Elastic collisions in two dimensions,A level,Further Mechanics 1,55.0,5.0,0.0,0.0,0.0,2.5,1.0
+24,Elastic strings and springs and elastic energy,A level,Further Mechanics 1,13.0,1.0,0.0,0.0,0.0,2.5,1.0
