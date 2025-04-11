@@ -1,15 +1,22 @@
+#
 import streamlit as st
 from custom_libraries.miscellaneous import sidebar
 from streamlit_app import question_bank, progress_record
 
 
-sidebar()
+# Updating search results on filter change
+def on_search(query):
+    if st.session_state[query]:
+        st.session_state.search_query[query] = st.session_state[query]
+    else:
+        st.session_state.search_query[query] = progress_record.loc[:, query].unique()
 
-st.title("Start a revision session")
+# Updating topic selection only if topics are selected manually
+def on_topic_selection():
+    st.session_state.selection = question_bank[question_bank["topic"].isin(st.session_state.topic_selection)][
+        "question_path"].to_list()
 
-st.markdown("Revise more efficiently with SuperMemo 2 algorithm! "
-            "Select specific areas, or just follow the suggestions &mdash; the algorithm will adapt to your needs.")
-
+# Initial search result is the whole question bank
 if "search_result" not in st.session_state:
     st.session_state.search_result = progress_record
 if "search_query" not in st.session_state:
@@ -20,6 +27,16 @@ if "search_query" not in st.session_state:
 if "selection" not in st.session_state:
     st.session_state.selection = []
 
+
+#! --- Page ---
+#
+sidebar()
+
+st.title("Start a revision session")
+st.markdown("Revise more efficiently with SuperMemo 2 algorithm! "
+            "Select specific areas, or just follow the suggestions &mdash; the algorithm will adapt to your needs.")
+
+# Update search result to match the latest query
 st.session_state.search_result = progress_record
 for key, value in st.session_state.search_query.items():
     st.session_state.search_result = st.session_state.search_result.loc[st.session_state.search_result[key].isin(value)]
@@ -31,13 +48,8 @@ elif not st.session_state.topic_selection:
     for topic in record[:4]:
         st.session_state.selection += question_bank.loc[question_bank["topic"] == topic]["question_path"].to_list()
 
-def on_search(query):
-    if st.session_state[query]:
-        st.session_state.search_query[query] = st.session_state[query]
-    else:
-        st.session_state.search_query[query] = progress_record.loc[:, query].unique()
 
-
+# Search filters
 st.pills(label="Qualification",
          options=progress_record.loc[:, "qualification"].unique(),
          selection_mode="multi",
@@ -51,18 +63,15 @@ st.pills(label="Paper",
          args=("paper",),
          on_change=on_search)
 
+#
 st.markdown(f"For the subjects you've selected SuperMemo 2 suggests to revise these topics: \n"
             f"* {record[0]} \n"
             f"* {record[1]} \n"
             f"* {record[2]} \n"
             f"* {record[3]} \n")
-
-
 st.write("Press \"Start revising\" to continue with algorithm's suggestions, otherwise, select specific topics to revise:")
 
-def on_topic_selection():
-    st.session_state.selection = question_bank[question_bank["topic"].isin(st.session_state.topic_selection)]["question_path"].to_list()
-
+# Manual topic selection
 st.multiselect(label="Topics",
                     options=question_bank.loc[:, "topic"].unique(),
                     key="topic_selection",

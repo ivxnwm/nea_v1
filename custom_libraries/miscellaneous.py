@@ -1,8 +1,18 @@
 #
 import streamlit as st
+import pandas as pd
 from datetime import datetime
 
 
+#! --- Debugging ---
+# Rerun logging for debugging
+def rerun_log():
+    if 'run_count' not in st.session_state:
+        st.session_state.run_count = 0
+    st.session_state.run_count += 1
+    print(f"\n--- App Rerun ({st.session_state.run_count}) @ {datetime.now().strftime('%H:%M:%S.%f')} ---")
+
+#! --- UI/UX ---
 # Customisable sidebar for pages
 def sidebar():
     with st.sidebar:
@@ -16,14 +26,7 @@ def sidebar():
         st.page_link("pages/about.py", label="About", icon="ℹ️")
 
 
-# Rerun logging for debugging
-def rerun_log():
-    if 'run_count' not in st.session_state:
-        st.session_state.run_count = 0
-    st.session_state.run_count += 1
-    print(f"\n--- App Rerun ({st.session_state.run_count}) @ {datetime.now().strftime('%H:%M:%S.%f')} ---")
-
-
+#! --- Progress tracking ---
 # SuperMemo 2 algorithm for spaced repetition
 def sm_2(grade, n, ef, interval):
     if grade >= 3:
@@ -42,7 +45,6 @@ def sm_2(grade, n, ef, interval):
     if ef < 1.3: ef = 1.3
 
     return n, ef, interval
-
 
 # Record marks in question bank and update progress record
 def record_marks(i):
@@ -79,4 +81,64 @@ def record_marks(i):
                                                                                          n, ef, interval]
     progress_record.to_csv("res/progress_record.csv")
 
+    # Display success message
     st.toast(f"Recorded {st.session_state["marks_" + str(i)]} marks", icon="✅")
+
+# Display progress stats for a paper
+def display_progress(paper):
+    from streamlit_app import question_bank, progress_record
+    paper_record = progress_record.loc[progress_record["paper"] == paper]
+
+    # Display paper stats dataframe
+    st.dataframe(paper_record.loc[:, ["topic", "marks_scored", "q_attempted"]], use_container_width=True,
+                 column_config={
+                     "topic": st.column_config.TextColumn("Topic"),
+                     "marks_scored": st.column_config.ProgressColumn("Marks scored", width="small",
+                         help="Total percentage of marks gained for all questions on this topic",
+                         format="%d%%", min_value=0, max_value=100),
+                     "q_attempted": st.column_config.ProgressColumn("Questions attempted", width="small",
+                          help="Total percentage of questions attempted on this topic",
+                          format="%d%%", min_value=0, max_value=100)},
+                 hide_index=True,
+                 key="stats_" + paper,
+                 on_select="rerun",
+                 selection_mode="single-row")
+
+    # On topic (row) selection: display topic stats
+    if st.session_state["stats_" + paper].selection.rows:
+        paper_record.reset_index(drop=True, inplace=True)
+        topic = paper_record.iat[st.session_state["stats_" + paper].selection.rows[0], 0]
+
+        st.subheader(topic)
+        st.markdown(f"""**Marks scored:**
+            {round(paper_record.loc[st.session_state["stats_" + paper].selection.rows[0], "marks_scored"] * 100)}%""")
+        st.markdown(f"""**Questions attempted:**
+            {round(paper_record.loc[st.session_state["stats_" + paper].selection.rows[0], "q_attempted"] * 100)}%""")
+
+        topic_bank = question_bank.loc[question_bank["topic"] == topic]
+
+        topic_stats = pd.DataFrame(data={"Question": [],
+                                         "Qualification": [],
+                                         "Year": [],
+                                         "Attempts": [],
+                                         "Last attempted": []})
+
+        for index, question in topic_bank.iterrows():
+            topic_stats = pd.concat([topic_stats,
+                                     pd.DataFrame(data={"Question": ["Question " + str(index + 1)],
+                                                        "Qualification": [question.loc["qualification"]],
+                                                        "Year": [question.loc["year"]],
+                                                        "Attempts": [len(question.loc["marks_gained"])],
+                                                        "Last attempted": [list(question.loc["marks_gained"])[-1]] \
+                                                            if question.loc["marks_gained"] else None
+                                                        })],
+                                    ignore_index=True)
+
+        # Display topic stats dataframe
+        st.dataframe(topic_stats,
+                     column_config={
+                         "Qualification": st.column_config.TextColumn(None, width="small"),
+                         "Year": st.column_config.Column(None, width="small"),
+                         "Attempts": st.column_config.Column(None, width="small"),
+                         "Last attempted": st.column_config.DateColumn(None, width="small")},
+                     hide_index=True)

@@ -34,7 +34,7 @@ def exam_display():
 
 
 #! --- Page ---
-# Page configuration
+#
 st.set_page_config(layout="wide")
 miscellaneous.sidebar()
 if st.session_state.open_chat:
@@ -42,24 +42,21 @@ if st.session_state.open_chat:
 else:
     col1, col2 = st.columns([0.7, 0.3])
 
-
+# Question resources
 with col1:
-    # Question resources
     if "selection" in st.session_state:
         questions = []
         mark_schemes = []
         for i in range(len(st.session_state.selection)):
-            with stylable_container(
-                key="question_container_" + str(i),
-                css_styles="""
-                    {
-                        background-color: #f5f7fb;
-                        border-radius: 1.2rem;
-                        padding: calc(1em - 1px)
-                    }
-                    """,
+            with stylable_container(key="question_container_" + str(i),
+                                    css_styles="""{background-color: #f5f7fb;
+                                                   border-radius: 1.2rem;
+                                                   padding: calc(1em - 1px)
+                                                   }""",
             ):
-                curr = question_bank.loc[question_bank["question_path"] == st.session_state.selection[i]].replace({float('nan'): None})
+
+                curr = question_bank.loc[question_bank["question_path"] == st.session_state.selection[i]].replace(
+                    {float('nan'): None})
                 content = {"Question": [curr.loc[:, "question_path"].values[0] + r".jpg"]
                                        + curr.loc[:, "additional_question_paths"].values[0],
                            "Mark scheme": curr.loc[:, "mark_scheme_paths"].values[0],
@@ -70,10 +67,10 @@ with col1:
                 st.header(f"Question {i+1}")
                 st.markdown(
                     f""":violet-badge[{curr.loc[:, "qualification"].values[0]}]
-                                :orange-badge[{curr.loc[:, "paper"].values[0]}]
-                                :gray-badge[{curr.loc[:, "year"].values[0]}]
-                                :blue-badge[{curr.loc[:, "topic"].values[0]}]
-                                Recommended time: {round(curr.loc[:, "marks_available"].values[0] * 1.2)} minutes"""
+                        :orange-badge[{curr.loc[:, "paper"].values[0]}]
+                        :gray-badge[{curr.loc[:, "year"].values[0]}]
+                        :blue-badge[{curr.loc[:, "topic"].values[0]}]
+                        Recommended time: {round(curr.loc[:, "marks_available"].values[0] * 1.2)} minutes"""
                 )
 
                 question_tab, mark_scheme_tab, e_r_tab, m_a_tab, marks_tab = st.tabs(content.keys())
@@ -126,19 +123,19 @@ with col2:
                                selection_mode="single",
                                default=None,
                                label_visibility="collapsed")
+    # Stopwatch
     if timer_selection == "Stopwatch":
-        # Stopwatch
         stopwatch_display()
         timers.stopwatch_buttons()
         st.divider()
+    # Timer
     elif timer_selection == "Timer":
-        # Timer
         st.session_state.timer_set_time = st.number_input("Set timer (minutes)", min_value=1, max_value=180, step=1)
         timer_display()
         timers.timer_buttons()
         st.divider()
+    # Exam clock
     elif timer_selection == "Exam clock":
-        # Exam clock
         st.session_state.exam_set_time = st.number_input("Set exam time (minutes)",
                                                          min_value=15, max_value=180, step=15)
         exam_display()

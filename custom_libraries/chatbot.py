@@ -17,11 +17,10 @@ def gemini_configuration():
                            "You always use MathJax to format mathematical expressions."
                            "Your prompt will be of the form: "
                            "List of questions, list of mark schemes respectively, student's prompt in triple quotes.")
-    model = genai.GenerativeModel(
-        model_name="gemini-2.0-flash-thinking-exp-1219",
-        system_instruction=system_instructions)
+    model = genai.GenerativeModel(model_name="gemini-2.0-flash-thinking-exp-1219",
+                                  system_instruction=system_instructions)
 
-    # Additional gemini configuration for chat
+    # Additional gemini configuration for maths chat
     if "messages" not in st.session_state:
         st.session_state.messages = [{"role": "assistant",
                                       "content": "Come solving faster! Obey your master!...",
@@ -40,4 +39,5 @@ def gemini_configuration():
     if "open_chat" not in st.session_state:
         st.session_state.open_chat = False
 
+    # the function return must be assigned to the model variable
     return model
