@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3624b37c-9b73-4a5a-9079-8cf8e4c30e1c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/custom_libraries/progress_tracking.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/custom_libraries/chatbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_libraries/chatbot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/custom_libraries/miscellaneous.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_libraries/miscellaneous.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/custom_libraries/timers.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_libraries/timers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/about.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/about.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/home.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/progress.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/progress.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/question_selector.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/question_selector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/question_viewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/question_viewer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/revision_session.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/revision_session.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/streamlit_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/streamlit_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/progress_record.csv" beforeDir="false" afterPath="$PROJECT_DIR$/res/progress_record.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/question_bank.csv" beforeDir="false" afterPath="$PROJECT_DIR$/res/question_bank.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,24 +48,24 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2tRl8gUSqqwduKZUL5s0ZNTe3GD" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "full.screen.before.presentation.mode": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/ivxnw/PycharmProjects/nea_v1",
-    "settings.editor.selected.configurable": "Settings.Markdown"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/ivxnw/PycharmProjects/nea_v1&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Settings.Markdown&quot;
   }
-}]]></component>
+}</component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <console-settings module-name="nea_v1" is-module-sdk="true">
@@ -92,7 +88,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-4f4e415b4190-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.26053.29" />
+        <option value="bundled-python-sdk-348a24fa61fa-5312c7369657-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.23774.444" />
       </set>
     </attachedChunks>
   </component>
@@ -120,5 +116,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pages/revision_session.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

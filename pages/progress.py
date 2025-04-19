@@ -1,11 +1,13 @@
 #
 import pandas as pd
 import streamlit as st
-from custom_libraries.miscellaneous import sidebar, display_progress
+from custom_libraries.miscellaneous import sidebar
+from custom_libraries.progress_tracking import display_progress
 from streamlit_app import question_bank, progress_record
 
 #! --- Page ---
 #
+st.set_page_config(layout="centered")
 sidebar()
 
 st.title("Your progress")

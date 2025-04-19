@@ -1,7 +1,7 @@
 #
 import streamlit as st
 import PIL.Image as im
-from custom_libraries import timers, miscellaneous, chatbot
+from custom_libraries import timers, miscellaneous, progress_tracking, chatbot
 from streamlit_app import question_bank
 from streamlit_extras.stylable_container import stylable_container
 
@@ -84,7 +84,7 @@ with col1:
                         st.image(mark_schemes[-1], use_container_width=True)
                 with e_r_tab:
                     if content["Examiner's report"]:
-                        st.write(content["Examiner's report"])
+                        st.markdown(content["Examiner's report"])
                     else:
                         st.write("Not available")
                 with m_a_tab:
@@ -102,7 +102,7 @@ with col1:
                                         min_value=0, max_value=content["Record marks"],
                                         key="marks_" + str(i),
                                         placeholder="Marks gained")
-                        st.button("Record marks", args=(i,), on_click=miscellaneous.record_marks, key="record_marks_" + str(i))
+                        st.button("Record marks", args=(i,), on_click=progress_tracking.record_marks, key="record_marks_" + str(i))
                     with right:
                         with st.expander("Previous attempts", expanded=True):
                             if curr.loc[:, "marks_gained"].values[0] == {}:
@@ -127,20 +127,18 @@ with col2:
     if timer_selection == "Stopwatch":
         stopwatch_display()
         timers.stopwatch_buttons()
-        st.divider()
     # Timer
     elif timer_selection == "Timer":
         st.session_state.timer_set_time = st.number_input("Set timer (minutes)", min_value=1, max_value=180, step=1)
         timer_display()
         timers.timer_buttons()
-        st.divider()
     # Exam clock
     elif timer_selection == "Exam clock":
         st.session_state.exam_set_time = st.number_input("Set exam time (minutes)",
                                                          min_value=15, max_value=180, step=15)
         exam_display()
         timers.exam_buttons()
-        st.divider()
+    st.divider()
 
 
     #! ---Chatbot---
