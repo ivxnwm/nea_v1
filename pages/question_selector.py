@@ -45,6 +45,8 @@ st.set_page_config(page_title="Blueberrevise", page_icon="🫐", layout="wide", 
         'About': "# This is a header. This is an *extremely* cool app!"
     })
 sidebar()
+st.logo("res/Blueberrevise logo 5.png", size="large")
+
 
 st.title("Question selector")
 

@@ -37,6 +37,7 @@ def exam_display():
 #
 st.set_page_config(layout="wide")
 miscellaneous.sidebar()
+st.logo("res/Blueberrevise logo 5.png", size="large")
 if st.session_state.open_chat:
     col1, col2 = st.columns([0.45, 0.55])
 else:

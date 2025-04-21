@@ -31,6 +31,8 @@ if "selection" not in st.session_state:
 #! --- Page ---
 #
 sidebar()
+st.logo("res/Blueberrevise logo 5.png", size="large")
+
 
 st.title("Start a revision session")
 st.markdown("Revise more efficiently with SuperMemo 2 algorithm! "

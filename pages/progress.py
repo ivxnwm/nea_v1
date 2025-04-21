@@ -9,6 +9,8 @@ from streamlit_app import question_bank, progress_record
 #
 st.set_page_config(layout="centered")
 sidebar()
+st.logo("res/Blueberrevise logo 5.png", size="large")
+
 
 st.title("Your progress")
 
