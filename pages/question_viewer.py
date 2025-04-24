@@ -63,7 +63,7 @@ with col1:
                            "Mark scheme": curr.loc[:, "mark_scheme_paths"].values[0],
                            "Examiner's report": curr.loc[:, "examiners_report"].values[0],
                            "Model answer": curr.loc[:, "model_answer_link"].values[0],
-                           "Record marks": curr.loc[:, "marks_available"].values[0]}
+                           "Record marks and time": curr.loc[:, "marks_available"].values[0]}
 
                 st.header(f"Question {i+1}")
                 st.markdown(
@@ -100,17 +100,29 @@ with col1:
                     left, right = st.columns(2)
                     with left:
                         st.number_input(label="Record marks you gained to keep track of your progress",
-                                        min_value=0, max_value=content["Record marks"],
-                                        key="marks_" + str(i),
-                                        placeholder="Marks gained")
-                        st.button("Record marks", args=(i,), on_click=progress_tracking.record_marks, key="record_marks_" + str(i))
+                                        min_value=0, max_value=content["Record marks and time"],
+                                        key="marks_" + str(i))
+                        st.number_input(label="Record time you spent on this question (optional)",
+                                        min_value=0, max_value=180, value=None,
+                                        key="time_" + str(i),
+                                        placeholder="Time spent (minutes)")
+                        st.button("Record marks and time",
+                                  args=(i,), on_click=progress_tracking.record_marks,
+                                  key="record_marks_" + str(i))
                     with right:
                         with st.expander("Previous attempts", expanded=True):
                             if curr.loc[:, "marks_gained"].values[0] == {}:
                                 st.write("No previous attempts")
                             else:
                                 for record in curr.loc[:, "marks_gained"].values[0]:
-                                    st.markdown(f"{record}: **{curr.loc[:, "marks_gained"].values[0][record]} marks**")
+                                    st.markdown(f"{record}: "
+                                                f"**{curr.loc[:, "marks_gained"].values[0][record][0]} marks**")
+                                    if isinstance(curr.loc[:, "marks_gained"].values[0][record][1], float):
+                                        st.caption(f"Time spent: "
+                                                   f"{round(curr.loc[:, "marks_gained"].values[0][record][1] * 100)}"
+                                                   f"% of recommended")
+                                    else:
+                                        st.caption("No time recorded")
     else:
         st.warning('''
         No question selected.  

@@ -89,7 +89,7 @@ def toggle_timer():
 # Function to run when timer ends - to be customised
 def on_timer_end():
     st.balloons()
-    time.sleep(3) # Pause for 3 seconds to allow balloons to be seen
+    time.sleep(2) # Pause for 3 seconds to allow balloons to be seen
 
 
 # Display timer - to be placed inside st.fragment to only rerun this part (run_every=1)
@@ -156,7 +156,7 @@ def toggle_exam():
 # Function to run when exam ends - to be customised
 def on_exam_end():
     st.balloons()
-    time.sleep(3) # Pause for 3 seconds to allow balloons to be seen
+    time.sleep(2) # Pause for 3 seconds to allow balloons to be seen
 
 
 # Display exam clock - to be placed inside st.fragment to only rerun this part (run_every=1)

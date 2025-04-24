@@ -29,8 +29,15 @@ def record_marks(i):
 
     # Record marks in question bank
     mask = question_bank["question_path"] == st.session_state.selection[i]
+    recommended_time = question_bank.loc[mask, "marks_available"].values[0] * 1.2
+    if st.session_state["time_" + str(i)]:
+        time_spent = st.session_state["time_" + str(i)] / recommended_time
+        time_spent = time_spent.item()
+    else:
+        time_spent = "No time recorded"
     question_bank.loc[mask, "marks_gained"] = question_bank.loc[mask, "marks_gained"].apply(
-        lambda d: {**d, datetime.today().strftime('%Y-%m-%d %H:%M:%S'): st.session_state["marks_" + str(i)]})
+        lambda d: {**d, datetime.today().strftime('%d %b %Y %H:%M'):
+            [st.session_state["marks_" + str(i)], time_spent]})
     question_bank.to_csv("res/question_bank.csv")
 
     # Update progress record
@@ -44,7 +51,7 @@ def record_marks(i):
     q_attempted = 0
 
     for marks_dict in topic_bank.loc[:, "marks_gained"]:
-        marks_gained += list(marks_dict.values())[-1] if marks_dict else 0
+        marks_gained += list(marks_dict.values())[-1][0] if marks_dict else 0
         q_attempted += 1 if marks_dict else 0
 
     marks_percentage = int(marks_gained / marks_available * 100)
