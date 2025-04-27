@@ -3,3 +3,7 @@ dotenv
 google.generativeai
 Pillow
 pandas
+ast
+streamlit_extras
+time
+datetime

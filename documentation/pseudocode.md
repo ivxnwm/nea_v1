@@ -167,7 +167,7 @@ procedure exam_display(exam_end_time, exam_start_time, exam_running, exam_first_
 endprocedure
 ```
 
-### Chatbot
+## Chatbot
 
 Initialise variables with initial values
 ```

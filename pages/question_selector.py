@@ -39,11 +39,7 @@ rerun_log()
 
 #! --- Page ---
 #
-st.set_page_config(page_title="Blueberrevise", page_icon="🫐", layout="wide", menu_items={
-        'Get Help': 'https://www.extremelycoolapp.com/help',
-        'Report a bug': "https://www.extremelycoolapp.com/bug",
-        'About': "# This is a header. This is an *extremely* cool app!"
-    })
+st.set_page_config(page_title="Blueberrevise", page_icon="🫐", layout="wide")
 sidebar()
 st.logo("res/Blueberrevise logo 5.png", size="large")
 
