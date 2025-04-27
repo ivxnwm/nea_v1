@@ -124,10 +124,10 @@ with col1:
                                     else:
                                         st.caption("No time recorded")
     else:
-        st.warning('''
+        st.warning("""
         No question selected.  
         Please select a question from the Question Selector page to view it here.
-        ''')
+        """)
 
 with col2:
     #! --- Timers ---
@@ -171,7 +171,7 @@ with col2:
             elif st.session_state.last_prompt:
                 full_prompt = [st.session_state.last_prompt]
 
-            with st.chat_message("assistant", avatar="res/master_of_numbers.jpg"):
+            with st.chat_message("assistant", avatar=None):
                 with st.spinner("Thinking"):
                     response = st.session_state.chat.send_message(content=full_prompt, stream=True)
                     response.resolve()
@@ -183,10 +183,10 @@ with col2:
                     temp.markdown(full_response)
                 st.markdown(response.text)
                 st.session_state.messages.append(
-                    {"role": "assistant", "content": full_response, "avatar": "res/master_of_numbers.jpg"})
+                    {"role": "assistant", "content": full_response, "avatar": None})
 
     # Prompt input
-    if prompt := st.chat_input("Ask Master of Numbers"):
+    if prompt := st.chat_input("Send a message"):
         st.session_state.messages.append({"role": "user", "content": prompt, "avatar": None})
         if st.session_state.first_prompt:
             st.session_state.open_chat = True

@@ -23,8 +23,8 @@ def gemini_configuration():
     # Additional gemini configuration for maths chat
     if "messages" not in st.session_state:
         st.session_state.messages = [{"role": "assistant",
-                                      "content": "Come solving faster! Obey your master!...",
-                                      "avatar": "res/master_of_numbers.jpg"}]
+                                      "content": "Ask me anything!",
+                                      "avatar": None}]
     if "chat" not in st.session_state:
         st.session_state.chat = model.start_chat(
             history=[

@@ -19,7 +19,6 @@ def sidebar():
         st.page_link("pages/home.py", label="Home", icon="🏠")
         st.page_link("pages/question_selector.py", label="Question selector", icon="❓")
         st.page_link("pages/revision_session.py", label="Revision session", icon="🔄")
-        st.divider()
         st.page_link("pages/progress.py", label="Your progress", icon="📈")
         st.button("Log out")
         st.divider()

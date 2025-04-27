@@ -106,11 +106,12 @@ with right:
                                                    padding: calc(1em - 1px)
                                                    }""",
             ):
-                for element in st.session_state.selection:
-                    st.write(f"{question_bank.loc[question_bank['question_path'] == element, "year"].values[0]} "
-                             f"{question_bank.loc[question_bank['question_path'] == element, "qualification"].values[0]} "
-                             f"{question_bank.loc[question_bank['question_path'] == element, "paper"].values[0]} "
-                             f"Question {element[15:16]} ")
+                with st.container(height=220, border=False):
+                    for element in st.session_state.selection:
+                        st.write(f"{question_bank.loc[question_bank['question_path'] == element, "year"].values[0]} "
+                                 f"{question_bank.loc[question_bank['question_path'] == element, "qualification"].values[0]} "
+                                 f"{question_bank.loc[question_bank['question_path'] == element, "paper"].values[0]} "
+                                 f"Question {element[15:16]} ")
 
         with st.container():
             if st.session_state.selection:

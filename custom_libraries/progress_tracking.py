@@ -95,9 +95,9 @@ def display_progress(paper):
 
         st.subheader(topic)
         st.markdown(f"""**Marks scored:**
-            {round(paper_record.loc[st.session_state["stats_" + paper].selection.rows[0], "marks_scored"] * 100)}%""")
+            {round(paper_record.loc[st.session_state["stats_" + paper].selection.rows[0], "marks_scored"])}%""")
         st.markdown(f"""**Questions attempted:**
-            {round(paper_record.loc[st.session_state["stats_" + paper].selection.rows[0], "q_attempted"] * 100)}%""")
+            {round(paper_record.loc[st.session_state["stats_" + paper].selection.rows[0], "q_attempted"])}%""")
 
         topic_progress = question_bank.loc[question_bank["topic"] == topic]
 

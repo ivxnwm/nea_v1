@@ -1,6 +1,10 @@
-# Timers
+# Pseudocode for the project
 
-## Stopwatch
+## Timers
+
+The code for timers is located in the `timers.py` file.
+
+### Stopwatch
 
 Initialise variables with initial values
 ```
@@ -12,7 +16,6 @@ procedure initialise_stopwatch()
     stopwatch_seconds = 0
 endprocedure
 ```
-
 
 Toggle stopwatch
 ```
@@ -50,7 +53,7 @@ procedure stopwatch_display(stopwatch_running, stopwatch_elapsed_time, stopwatch
 endprocedure
 ```
 
-## Timer
+### Timer
 
 Initialise variables with initial values
 ```
@@ -105,7 +108,7 @@ procedure timer_display(timer_running, timer_remaining_time, timer_first_run, ti
 endprocedure
 ```
 
-# Exam clock
+### Exam clock
 
 Initialise variables with initial values
 
@@ -164,7 +167,7 @@ procedure exam_display(exam_end_time, exam_start_time, exam_running, exam_first_
 endprocedure
 ```
 
-# Chatbot
+### Chatbot
 
 Initialise variables with initial values
 ```
@@ -235,3 +238,38 @@ procedure generate_seponce(messages, first_prompt, last_prompt, question, mark_s
     endif
 endprocedure
 ```
+
+## SM-2 algorithm
+
+SM-2 tracks three properties for each card being studied [1]:
+- The repetition number n, which is the number of times the card has been successfully recalled (meaning it was given a grade ≥ 3) in a row since the last time it was not.
+- The easiness factor EF, which loosely indicates how “easy” the card is (more precisely, it determines how quickly the inter-repetition interval grows). The initial value of EF is 2.5.
+- The inter-repetition interval I, which is the length of time (in days) SuperMemo will wait after the previous review before asking the user to review the card again.
+
+In this implementation, the grade is calculated proportionally to the marks gained by the student: 0 is 0%, 5 is 100%.
+```
+procedure sm_2(grade, n, EF, I)
+    if grade >= 3 then // correct response
+        if n = 0 then
+            I = 1
+        else if n = 1 then
+            I = 6
+        else
+            I = round(I × EF)
+        end if
+        n = n + 1
+    else // incorrect response
+        n = 0
+        I = 1
+    end if
+    
+    EF = EF + (0.1 − (5 − q) * (0.08 + (5 − q) * 0.02))
+    if EF < 1.3 then
+        EF = 1.3
+    end if
+    
+    return (n, EF, I)
+endprocedure
+```
+
+[1]: ["Super-Memo 2 Plugin for Super-Memo for Windows: Delphi Source Code"](https://www.super-memory.com/english/ol/sm2source.htm). SuperMemo Articles. Retrieved April 27, 2025.
