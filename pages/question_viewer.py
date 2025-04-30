@@ -103,7 +103,7 @@ with col1:
                                         min_value=0, max_value=content["Record marks and time"],
                                         key="marks_" + str(i))
                         st.number_input(label="Record time you spent on this question (optional)",
-                                        min_value=0, max_value=180, value=None,
+                                        min_value=1, max_value=180, value=None,
                                         key="time_" + str(i),
                                         placeholder="Time spent (minutes)")
                         st.button("Record marks and time",
@@ -167,7 +167,6 @@ with col2:
             # For the first user message, include question and mark scheme
             if st.session_state.first_prompt:
                 full_prompt = questions + mark_schemes + ["'''" + st.session_state.first_prompt + "'''"]
-                st.session_state.first_prompt = False
             elif st.session_state.last_prompt:
                 full_prompt = [st.session_state.last_prompt]
 
@@ -181,9 +180,10 @@ with col2:
                         full_response += chunk
                         temp.markdown(full_response)
                     temp.markdown(full_response)
-                st.markdown(response.text)
                 st.session_state.messages.append(
                     {"role": "assistant", "content": full_response, "avatar": None})
+
+            st.session_state.first_prompt = False
 
     # Prompt input
     if prompt := st.chat_input("Send a message"):

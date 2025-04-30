@@ -7,9 +7,9 @@ from streamlit_app import question_bank, progress_record
 # Updating search results on filter change
 def on_search(query):
     if st.session_state[query]:
-        st.session_state.search_query[query] = st.session_state[query]
+        st.session_state.rs_search_query[query] = st.session_state[query]
     else:
-        st.session_state.search_query[query] = progress_record.loc[:, query].unique()
+        st.session_state.rs_search_query[query] = progress_record.loc[:, query].unique()
 
 # Updating topic selection only if topics are selected manually
 def on_topic_selection():
@@ -17,10 +17,10 @@ def on_topic_selection():
         "question_path"].to_list()
 
 # Initial search result is the whole question bank
-if "search_result" not in st.session_state:
-    st.session_state.search_result = progress_record
-if "search_query" not in st.session_state:
-    st.session_state.search_query = {
+if "rs_search_result" not in st.session_state:
+    st.session_state.rs_search_result = progress_record
+if "rs_search_query" not in st.session_state:
+    st.session_state.rs_search_query = {
         "qualification": question_bank.loc[:, "qualification"].unique(),
         "paper": question_bank.loc[:, "paper"].unique(),
     }
@@ -38,11 +38,11 @@ st.title("Start a revision session")
 st.markdown("Revise more efficiently with SuperMemo 2 algorithm! "
             "Select specific areas, or just follow the suggestions &mdash; the algorithm will adapt to your needs.")
 
-# Update search result to match the latest query
-st.session_state.search_result = progress_record
-for key, value in st.session_state.search_query.items():
-    st.session_state.search_result = st.session_state.search_result.loc[st.session_state.search_result[key].isin(value)]
-record = st.session_state.search_result.loc[:, ["topic", "interval"]].sort_values(by=["interval"])["topic"].to_list()
+# Update revision session search result to match the latest query
+st.session_state.rs_search_result = progress_record
+for key, value in st.session_state.rs_search_query.items():
+    st.session_state.rs_search_result = st.session_state.rs_search_result.loc[st.session_state.rs_search_result[key].isin(value)]
+record = st.session_state.rs_search_result.loc[:, ["topic", "interval"]].sort_values(by=["interval"])["topic"].to_list()
 if "topic_selection" not in st.session_state:
     for topic in record[:4]:
         st.session_state.selection += question_bank.loc[question_bank["topic"] == topic]["question_path"].to_list()

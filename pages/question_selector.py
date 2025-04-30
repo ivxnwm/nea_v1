@@ -8,22 +8,22 @@ from streamlit_extras.stylable_container import stylable_container
 # Updating search results on filter change
 def on_search(query):
     if st.session_state[query]:
-        st.session_state.search_query[query] = st.session_state[query]
+        st.session_state.qs_search_query[query] = st.session_state[query]
     else:
-        st.session_state.search_query[query] = question_bank.loc[:, query].unique()
+        st.session_state.qs_search_query[query] = question_bank.loc[:, query].unique()
 
 # Updating selection on checkbox change
 def on_selection():
     st.session_state.selection = []
-    for i in range(len(st.session_state.search_result)):
+    for i in range(len(st.session_state.qs_search_result)):
         if st.session_state["selection_" + str(i)]:
-            st.session_state.selection.append(st.session_state.search_result.iat[i, 0])
+            st.session_state.selection.append(st.session_state.qs_search_result.iat[i, 0])
 
 # Initial search result is the whole question bank
-if "search_result" not in st.session_state:
-    st.session_state.search_result = question_bank
-if "search_query" not in st.session_state:
-    st.session_state.search_query = {
+if "qs_search_result" not in st.session_state:
+    st.session_state.qs_search_result = question_bank
+if "qs_search_query" not in st.session_state:
+    st.session_state.qs_search_query = {
         "qualification": question_bank.loc[:, "qualification"].unique(),
         "paper": question_bank.loc[:, "paper"].unique(),
         "year": question_bank.loc[:, "year"].unique(),
@@ -51,10 +51,10 @@ st.title("Question selector")
 # st.session_state
 
 
-# Update search result to match the latest query
-st.session_state.search_result = question_bank
-for key, value in st.session_state.search_query.items():
-    st.session_state.search_result = st.session_state.search_result.loc[st.session_state.search_result[key].isin(value)]
+# Update question bank search result to match the latest query
+st.session_state.qs_search_result = question_bank
+for key, value in st.session_state.qs_search_query.items():
+    st.session_state.qs_search_result = st.session_state.qs_search_result.loc[st.session_state.qs_search_result[key].isin(value)]
 
 
 left, right = st.columns([0.6, 0.4])
@@ -118,7 +118,7 @@ with right:
             st.button("Select all",
                       key="select_all_button",
                       on_click=lambda: st.session_state.update(
-                          {"selection": st.session_state.search_result["question_path"].tolist()}),
+                          {"selection": st.session_state.qs_search_result["question_path"].tolist()}),
                       use_container_width=True)
             st.page_link("pages/question_viewer.py",
                          label="Start practicing",
@@ -129,7 +129,7 @@ with right:
 # Display search results
 grid = st.columns(3)
 col = 0
-for i in range(len(st.session_state.search_result)):
+for i in range(len(st.session_state.qs_search_result)):
     with grid[col]:
         with stylable_container(key="search_result_container_"+str(i),
                                 css_styles="""{background-color: #f5f7fb;
@@ -138,11 +138,11 @@ for i in range(len(st.session_state.search_result)):
                                                }""",
         ):
             with st.container():
-                st.image(r"res/" + st.session_state.search_result.iat[i, 0] + r".jpg")
-            st.write(st.session_state.search_result.iat[i, 10])
-            st.markdown(f""":violet-badge[{st.session_state.search_result.iat[i, 5]}]
-                            :orange-badge[{st.session_state.search_result.iat[i, 8]}]
-                            :gray-badge[{st.session_state.search_result.iat[i, 9]}]"""
+                st.image(r"res/" + st.session_state.qs_search_result.iat[i, 0] + r".jpg")
+            st.write(st.session_state.qs_search_result.iat[i, 10])
+            st.markdown(f""":violet-badge[{st.session_state.qs_search_result.iat[i, 5]}]
+                            :orange-badge[{st.session_state.qs_search_result.iat[i, 8]}]
+                            :gray-badge[{st.session_state.qs_search_result.iat[i, 9]}]"""
             )
             st.checkbox("Select this question", key="selection_" + str(i), on_change=on_selection)
     col = (col + 1) % 3
