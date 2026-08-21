@@ -1,7 +1,7 @@
-streamlit
+streamlit==1.45.0
 dotenv
 google.generativeai
-Pillow==11.2.1
+Pillow
 pandas==2.3.3
 streamlit_extras
 

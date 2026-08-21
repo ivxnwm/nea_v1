@@ -17,7 +17,7 @@ def gemini_configuration():
                            "You always use MathJax to format mathematical expressions."
                            "Your prompt will be of the form: "
                            "List of questions, list of mark schemes respectively, student's prompt in triple quotes.")
-    model = genai.GenerativeModel(model_name="gemini-2.0-flash-thinking-exp-1219",
+    model = genai.GenerativeModel(model_name="gemini-3-flash-preview",
                                   system_instruction=system_instructions)
 
     # Additional gemini configuration for maths chat
